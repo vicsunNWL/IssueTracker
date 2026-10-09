@@ -47,4 +47,18 @@ public class TicketService
             ticket.Priority
         });
     }
+
+    public async Task<bool> DeleteTicket(int id)
+    {
+        using var connection = new SqlConnection(_connectionString);
+
+        const string sql = """
+        DELETE FROM dbo.Tickets
+        WHERE Id = @Id;
+        """;
+
+        var affectedRows = await connection.ExecuteAsync(sql, new { Id = id });
+
+        return affectedRows > 0;
+    }
 }

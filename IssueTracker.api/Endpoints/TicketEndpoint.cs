@@ -49,6 +49,20 @@ public static class TicketEndpoint
             return Results.Created($"/api/tickets/{id}", result);
         });
 
+        app.MapDelete("/api/tickets/{id:int}", async (
+        int id,
+        TicketService service) =>
+        {
+            var deleted = await service.DeleteTicket(id);
+
+            if (!deleted)
+            {
+                return Results.NotFound();
+            }
+
+            return Results.NoContent();
+        });
+
     }
 
 
