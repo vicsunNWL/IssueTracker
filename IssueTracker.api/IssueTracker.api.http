@@ -1,6 +1,5 @@
 @IssueTracker.api_HostAddress = https://localhost:8000
 
-GET {{IssueTracker.api_HostAddress}}/weatherforecast/
+### Hämta alla supportärenden
+GET {{IssueTracker.api_HostAddress}}/api/tickets
 Accept: application/json
-
-###
