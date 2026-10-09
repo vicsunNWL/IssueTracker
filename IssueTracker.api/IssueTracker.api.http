@@ -3,3 +3,23 @@
 ### Hämta alla supportärenden
 GET {{IssueTracker.api_HostAddress}}/api/tickets
 Accept: application/json
+
+### Skapa ett supportärende
+POST {{IssueTracker.api_HostAddress}}/api/tickets
+Content-Type: application/json
+
+{
+  "title": "Kan inte logga in",
+  "description": "Användaren kan inte logga in i systemet.",
+  "priority": "High"
+}
+
+### Testa flera valideringsfel
+POST {{IssueTracker.api_HostAddress}}/api/tickets
+Content-Type: application/json
+
+{
+  "title": "Hej",
+  "description": "   ",
+  "priority": "Urgent"
+}

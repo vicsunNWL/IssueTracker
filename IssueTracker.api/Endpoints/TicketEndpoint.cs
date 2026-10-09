@@ -22,5 +22,34 @@ public static class TicketEndpoint
 
             return Results.Ok(result);
         });
+
+        app.MapPost("/api/tickets", async (
+        CreateTicketDto ticket,
+        TicketService service,
+        TicketValidationService validationService) =>
+        {
+            var errors = validationService.Validate(ticket);
+
+            if (errors.Count > 0)
+            {
+                return Results.ValidationProblem(errors);
+            }
+
+            var id = await service.CreateTicket(ticket);
+
+            var result = new TicketDto
+            {
+                Id = id,
+                Title = ticket.Title,
+                Description = ticket.Description,
+                Status = "Open",
+                Priority = ticket.Priority
+            };
+
+            return Results.Created($"/api/tickets/{id}", result);
+        });
+
     }
+
+
 }
