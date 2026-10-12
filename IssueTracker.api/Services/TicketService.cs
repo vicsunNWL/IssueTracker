@@ -85,4 +85,18 @@ public class TicketService
 
         return affectedRows > 0;
     }
+
+    public async Task<Ticket?> GetTicketById(int id)
+{
+        using var connection = new SqlConnection(_connectionString);
+
+        const string sql = """
+        SELECT Id, Title, Description, Status, Priority
+        FROM dbo.Tickets
+        WHERE Id = @Id;
+        """;
+
+     return await connection.QuerySingleOrDefaultAsync<Ticket>(
+        sql, new { Id = id });
+}
 }

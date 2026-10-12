@@ -1,4 +1,6 @@
-﻿CREATE DATABASE IssueTracker;
+﻿-- SQL script to create the IssueTracker database and Tickets table
+
+CREATE DATABASE IssueTracker;
 GO
 
 USE IssueTracker;
@@ -22,6 +24,7 @@ CREATE TABLE dbo.Tickets (
 );
 GO
 
+--Use below insert to add sample data to the Tickets table
 
 USE IssueTracker;
 

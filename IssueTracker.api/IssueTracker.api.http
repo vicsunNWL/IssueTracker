@@ -37,3 +37,15 @@ Content-Type: application/json
   "status": "InProgress",
   "priority": "High"
 }
+
+### Ändra status på ett supportärende
+PATCH {{IssueTracker.api_HostAddress}}/api/tickets/2
+Content-Type: application/json-patch+json
+
+[
+  {
+    "op": "replace",
+    "path": "/status",
+    "value": "Closed"
+  }
+]
