@@ -61,4 +61,28 @@ public class TicketService
 
         return affectedRows > 0;
     }
+    public async Task<bool> UpdateTicket(int id, UpdateTicketDto ticket)
+    {
+        using var connection = new SqlConnection(_connectionString);
+
+        const string sql = """
+        UPDATE dbo.Tickets
+        SET Title = @Title,
+            Description = @Description,
+            Status = @Status,
+            Priority = @Priority
+        WHERE Id = @Id;
+        """;
+
+        var affectedRows = await connection.ExecuteAsync(sql, new
+        {
+            Id = id,
+            ticket.Title,
+            ticket.Description,
+            ticket.Status,
+            ticket.Priority
+        });
+
+        return affectedRows > 0;
+    }
 }

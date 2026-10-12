@@ -63,7 +63,32 @@ public static class TicketEndpoint
             return Results.NoContent();
         });
 
+        app.MapPut("/api/tickets/{id:int}", async (
+    int id,
+    UpdateTicketDto ticket,
+    TicketService service,
+    TicketValidationService validationService) =>
+        {
+            var errors = validationService.Validate(ticket);
+
+            if (errors.Count > 0)
+            {
+                return Results.ValidationProblem(errors);
+            }
+
+            var updated = await service.UpdateTicket(id, ticket);
+
+            if (!updated)
+            {
+                return Results.NotFound();
+            }
+
+            return Results.NoContent();
+        });
+
     }
+
+    
 
 
 }

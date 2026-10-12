@@ -26,3 +26,14 @@ Content-Type: application/json
 
 ### Radera ett supportärende
 DELETE {{IssueTracker.api_HostAddress}}/api/tickets/4
+
+### Uppdatera ett supportärende
+PUT {{IssueTracker.api_HostAddress}}/api/tickets/2
+Content-Type: application/json
+
+{
+  "title": "Problem med inloggning",
+  "description": "Inloggningen fungerar inte efter lösenordsbyte.",
+  "status": "InProgress",
+  "priority": "High"
+}

@@ -35,4 +35,21 @@ public class TicketValidationService
 
         return errors;
     }
+
+    public Dictionary<string, string[]> Validate(UpdateTicketDto ticket)
+    {
+        var errors = Validate(new CreateTicketDto
+        {
+            Title = ticket.Title,
+            Description = ticket.Description,
+            Priority = ticket.Priority
+        });
+
+        if (ticket.Status is not ("Open" or "InProgress" or "Closed"))
+        {
+            errors["status"] = ["Status måste vara Open, InProgress eller Closed."];
+        }
+
+        return errors;
+    }
 }
